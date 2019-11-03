@@ -31,7 +31,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="name_TextFieldFunction:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="AbK-gz-FQu"/>
+                                    <action selector="name_TextFieldFunction:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="aAG-UT-bS6"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xw9-Qt-EWC">
