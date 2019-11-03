@@ -29,6 +29,8 @@ class ViewController: UIViewController {
     
     
     @IBAction func submit_Button(_ sender: Any) {
+        // clear message field
+        self.message_TextView.text = ""
         spinner.startAnimating()
         // xml for updating device
         let assignXml = """
