@@ -23,6 +23,10 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
+    @IBAction func name_TextFieldFunction(_ sender: Any) {
+        submit_Button(self)
+    }
+    
     
     @IBAction func submit_Button(_ sender: Any) {
         spinner.startAnimating()
@@ -86,25 +90,28 @@ class ViewController: UIViewController {
         // https://www.hackingwithswift.com/example-code/uicolor
         main_UIView.backgroundColor = UIColor(red: 0x5C/255.0, green: 0x78/255.0, blue: 0x94/255.0, alpha: 1.0)
         
-                // ensure we have an app config
-                if let configDict = UserDefaults.standard.dictionary(forKey: "com.apple.configuration.managed") {
-                    baseUrl    = configDict["baseUrl"] as! String
-                    username   = configDict["username"] as! String
-                    password   = configDict["password"] as! String
-                    deviceUdid = configDict["udid"] as! String
-                } else {
-                    // handle missing app config here
-                    self.message_TextView.text = "Missing App Config"
-                    self.message_TextView.textColor = UIColor.red
-                    self.message_TextView.font =  UIFont(name: "HelveticaNeue", size: CGFloat(32))
-                    // for testing without app config
-                    baseUrl    = "https://coldmizer.jamfcloud.com"
-                    username   = "userAssign"
-                    password   = "J@mf12345"
-                    deviceUdid = "c49c160637321de3905c9289ad0d2313d93015bb"   // test iPhone5
-                }
-
-
+        // ensure we have an app config
+        if let configDict = UserDefaults.standard.dictionary(forKey: "com.apple.configuration.managed"),
+            let _ = configDict["baseUrl"],
+            let _ = configDict["username"],
+            let _ = configDict["password"],
+            let _ = configDict["udid"] {
+            baseUrl    = configDict["baseUrl"] as! String
+            username   = configDict["username"] as! String
+            password   = configDict["password"] as! String
+            deviceUdid = configDict["udid"] as! String
+            // app config is valid
+        } else {
+            // handle missing app config here
+            self.message_TextView.text = "Missing App Config"
+            self.message_TextView.textColor = UIColor.red
+            self.message_TextView.font =  UIFont(name: "HelveticaNeue", size: CGFloat(32))
+            // for testing without app config
+            baseUrl    = "https://m.hickoryhillseast.net"
+            username   = "userAssign"
+            password   = "J@mf12345"
+            deviceUdid = "c49c160637321de3905c9289ad0d2313d93015bb"   // test iPhone5
+        }
     }
 }
 
