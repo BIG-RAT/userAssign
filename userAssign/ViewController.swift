@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, URLSessionDelegate {
     
     @IBOutlet var main_UIView: UIView!
     
@@ -109,11 +109,15 @@ class ViewController: UIViewController {
             self.message_TextView.textColor = UIColor.red
             self.message_TextView.font =  UIFont(name: "HelveticaNeue", size: CGFloat(32))
             // for testing without app config
-            baseUrl    = "https://m.hickoryhillseast.net"
+            baseUrl    = "https://your.jamf.server"
             username   = "userAssign"
-            password   = "J@mf12345"
-            deviceUdid = "c49c160637321de3905c9289ad0d2313d93015bb"   // test iPhone5
+            password   = "S3cr3t"
+            deviceUdid = "c49c160637321fa3905c4311ad0d2313d93015bb"   // test device
         }
+    }
+    
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping(  URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        completionHandler(.useCredential, URLCredential(trust: challenge.protectionSpace.serverTrust!))
     }
 }
 
