@@ -108,7 +108,7 @@ class ViewController: UIViewController, URLSessionDelegate {
             self.message_TextView.text = "Missing App Config"
             self.message_TextView.textColor = UIColor.red
             self.message_TextView.font =  UIFont(name: "HelveticaNeue", size: CGFloat(32))
-            // for testing without app config
+            // for simulator testing without app config
             baseUrl    = "https://your.jamf.server"
             username   = "userAssign"
             password   = "S3cr3t"
