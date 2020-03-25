@@ -19,6 +19,8 @@ class ViewController: UIViewController, URLSessionDelegate {
     var deviceUdid = ""
         
     @IBOutlet weak var name_TextField: UITextField!
+    @IBOutlet weak var assetTag_TextField: UITextField!
+    
     @IBOutlet weak var message_TextView: UITextView!
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
@@ -29,25 +31,41 @@ class ViewController: UIViewController, URLSessionDelegate {
     
     
     @IBAction func submit_Button(_ sender: Any) {
+        var general  = ""
+        var location = ""
         // clear message field
         self.message_TextView.text = ""
         spinner.startAnimating()
+        
+        if assetTag_TextField.text != "" {
+            general = """
+            <general>
+                <asset_tag>\(String(describing: assetTag_TextField.text!))</asset_tag>
+            </general>
+            """
+        }
+        
+        location = """
+        <location>
+            <username>\(String(describing: name_TextField.text!))</username>
+            <realname/>
+            <real_name/>
+            <email_address/>
+            <position/>
+            <phone/>
+            <phone_number/>
+            <department/>
+            <building/>
+            <room/>
+        </location>
+        """
+        
         // xml for updating device
         let assignXml = """
         <?xml version=\"1.0\" encoding=\"UTF-8\"?>
         <mobile_device>
-            <location>
-                <username>\(String(describing: name_TextField.text!))</username>
-                <realname/>
-                <real_name/>
-                <email_address/>
-                <position/>
-                <phone/>
-                <phone_number/>
-                <department/>
-                <building/>
-                <room/>
-            </location>
+            \(String(describing: general))
+            \(String(describing: location))
         </mobile_device>
         """
         let deviceUrl   = "\(baseUrl)/JSSResource/mobiledevices/udid/\(deviceUdid)"
