@@ -13,13 +13,21 @@ class ViewController: UIViewController, URLSessionDelegate {
     @IBOutlet var main_UIView: UIView!
     
     // variables for API call
-    var baseUrl    = ""
-    var username   = ""
-    var password   = ""
-    var deviceUdid = ""
+    var baseUrl       = ""
+    var username      = ""
+    var password      = ""
+    var deviceUdid    = ""
+    var eaShow        = false
+    var eaID          = "0"
+    var eaName        = ""
+    var popup_choices = [String]()
+    var customConfig  = ""
         
     @IBOutlet weak var name_TextField: UITextField!
     @IBOutlet weak var assetTag_TextField: UITextField!
+    @IBOutlet weak var config_Button: UIButton!
+    @IBOutlet weak var selectedConfig_TextField: UITextField!
+    
     
     @IBOutlet weak var message_TextView: UITextView!
     
@@ -29,10 +37,21 @@ class ViewController: UIViewController, URLSessionDelegate {
         submit_Button(self)
     }
     
+    @IBAction func selectConfig_Action(_ sender: Any) {
+        performSegue(withIdentifier: "configSegue", sender: self)
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let configVC: ConfigViewController = segue.destination as! ConfigViewController
+        configVC.configArray = popup_choices
+    }
     
     @IBAction func submit_Button(_ sender: Any) {
-        var general  = ""
-        var location = ""
+        var general             = ""
+        var location            = ""
+        var extension_attribute = ""
+        
         // clear message field
         self.message_TextView.text = ""
         spinner.startAnimating()
@@ -42,6 +61,20 @@ class ViewController: UIViewController, URLSessionDelegate {
             <general>
                 <asset_tag>\(String(describing: assetTag_TextField.text!))</asset_tag>
             </general>
+            """
+        }
+        
+        if selectedConfig_TextField.text != "" {
+            extension_attribute = """
+            <extension_attributes>
+              <extension_attribute>
+                <id>18</id>
+                <name>\(String(describing: eaName))</name>
+                <type>String</type>
+                <multi_value>false</multi_value>
+                <value>\(String(describing: selectedConfig_TextField.text!))</value>
+              </extension_attribute>
+            </extension_attributes>
             """
         }
         
@@ -66,6 +99,7 @@ class ViewController: UIViewController, URLSessionDelegate {
         <mobile_device>
             \(String(describing: general))
             \(String(describing: location))
+            \(String(describing: extension_attribute))
         </mobile_device>
         """
         let deviceUrl   = "\(baseUrl)/JSSResource/mobiledevices/udid/\(deviceUdid)"
@@ -103,12 +137,21 @@ class ViewController: UIViewController, URLSessionDelegate {
         // attempt to update - end
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        print("[viewWillAppear]")
+//        selectedConfig_TextField.text = "\(Preferences.selectedConfig)"
+//    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+
         // Do any additional setup after loading the view.
         // HexColor - Mac App Store
         // https://www.hackingwithswift.com/example-code/uicolor
         main_UIView.backgroundColor = UIColor(red: 0x5C/255.0, green: 0x78/255.0, blue: 0x94/255.0, alpha: 1.0)
+        selectedConfig_TextField.textAlignment = .center
         
         // ensure we have an app config
         if let configDict = UserDefaults.standard.dictionary(forKey: "com.apple.configuration.managed"),
@@ -121,6 +164,14 @@ class ViewController: UIViewController, URLSessionDelegate {
             password   = configDict["password"] as! String
             deviceUdid = configDict["udid"] as! String
             // app config is valid
+            if let _ = configDict["eaShow"], let _ = configDict["eaID"] {
+                eaShow = configDict["eaShow"] as! Bool
+                eaID   = configDict["eaID"] as! String
+                if eaShow {
+                    config_Button.isHidden = false
+                    selectedConfig_TextField.isHidden = false
+                }
+            }
         } else {
             // handle missing app config here
             self.message_TextView.text = "Missing App Config"
@@ -131,10 +182,16 @@ class ViewController: UIViewController, URLSessionDelegate {
             username   = "testUserAssign"
             password   = "S3cr3t"
             deviceUdid = "80023a617b92bbc7aca27463a3df5ac0b188a654"   // test device udid
+            eaShow     = true
+            eaID       = "18"
+            if eaShow {
+                config_Button.isHidden = false
+                selectedConfig_TextField.isHidden = false
+            }
         }   // if let configDict - end
         
         // pull list for dropdown from EA
-                let attributeURL = "\(baseUrl)/JSSResource/mobiledeviceextensionattributes/id/18"
+                let attributeURL = "\(baseUrl)/JSSResource/mobiledeviceextensionattributes/id/\(eaID)"
                 let creds        = "\(username):\(password)"
                 let base64Creds  = creds.data(using: .utf8)?.base64EncodedString()
                 // attempt to update - start
@@ -157,12 +214,15 @@ class ViewController: UIViewController, URLSessionDelegate {
                             if let dataJSON = json as? [String:Any] {
                                 print("dataJSON: \(dataJSON)")
                                 let eaAttributes = dataJSON["mobile_device_extension_attribute"] as! [String:Any]
-                                let eaName = eaAttributes["name"] as! String
+                                self.eaName = eaAttributes["name"] as! String
+                                
+                                self.config_Button.setTitle("\(self.eaName): ", for: .normal)
+                                
                                 guard let _ = eaAttributes["input_type"] else { return }
                                 let input_type = eaAttributes["input_type"] as! [String:Any]
                                 if input_type["type"] as! String == "Pop-up Menu" {
-                                    let popup_choices = input_type["popup_choices"] as! [String]
-                                    print("popup_choices for \(eaName): \(popup_choices)")
+                                    self.popup_choices = input_type["popup_choices"] as! [String]
+                                    print("popup_choices for \(self.eaName): \(self.popup_choices)")
                                 }
                             }
                         }
