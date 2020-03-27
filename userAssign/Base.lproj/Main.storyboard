@@ -34,19 +34,6 @@
                                     <action selector="name_TextFieldFunction:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="aAG-UT-bS6"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xw9-Qt-EWC">
-                                <rect key="frame" x="392.5" y="183" width="49" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="49" id="Izo-ry-s9B"/>
-                                    <constraint firstAttribute="height" constant="30" id="Pa7-CK-dUe"/>
-                                </constraints>
-                                <state key="normal" title="Submit">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="submit_Button:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XUe-qg-qOg"/>
-                                </connections>
-                            </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="MHm-T9-rF4">
                                 <rect key="frame" x="398.5" y="183" width="37" height="37"/>
                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -70,7 +57,6 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b9G-JP-zVC">
                                 <rect key="frame" x="30" y="137" width="774" height="34"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="774" id="DXI-S8-oyU"/>
                                     <constraint firstAttribute="height" constant="34" id="hMO-3Z-yA6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -79,27 +65,40 @@
                                     <action selector="name_TextFieldFunction:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="q5e-Ej-Rza"/>
                                 </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xw9-Qt-EWC">
+                                <rect key="frame" x="755" y="190" width="49" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="ArX-n0-kaH"/>
+                                    <constraint firstAttribute="width" constant="49" id="yGh-5t-ViQ"/>
+                                </constraints>
+                                <state key="normal" title="Submit">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="submit_Button:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XUe-qg-qOg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="8aO-NX-9UR" firstAttribute="top" secondItem="MHm-T9-rF4" secondAttribute="bottom" constant="12" id="1Ha-xt-H8o"/>
                             <constraint firstItem="Jyp-9A-agi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="37" id="1dd-aM-k6L"/>
-                            <constraint firstItem="Xw9-Qt-EWC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6Pl-j8-EBF"/>
                             <constraint firstItem="8aO-NX-9UR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="79m-9l-RuK"/>
                             <constraint firstItem="Rah-DI-Lgg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GCk-mH-hXT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4l8-LT-hd1" secondAttribute="trailing" constant="30" id="GkB-UR-XhH"/>
                             <constraint firstItem="Jyp-9A-agi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="N41-7n-AEZ"/>
                             <constraint firstItem="b9G-JP-zVC" firstAttribute="top" secondItem="Rah-DI-Lgg" secondAttribute="bottom" constant="8" id="NL8-4c-HyR"/>
-                            <constraint firstItem="Xw9-Qt-EWC" firstAttribute="top" secondItem="b9G-JP-zVC" secondAttribute="bottom" constant="12" id="QOx-LQ-CFC"/>
                             <constraint firstItem="Rah-DI-Lgg" firstAttribute="top" secondItem="4l8-LT-hd1" secondAttribute="bottom" constant="8" id="Wwh-o5-Cou"/>
                             <constraint firstItem="Rah-DI-Lgg" firstAttribute="top" secondItem="4l8-LT-hd1" secondAttribute="bottom" constant="8" id="aEy-Wi-J9K"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="b9G-JP-zVC" secondAttribute="trailing" constant="30" id="aUP-LK-Phy"/>
                             <constraint firstItem="4l8-LT-hd1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="66" id="bcQ-O9-h5c"/>
                             <constraint firstItem="b9G-JP-zVC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="cnb-gJ-YaW"/>
+                            <constraint firstItem="Xw9-Qt-EWC" firstAttribute="top" secondItem="b9G-JP-zVC" secondAttribute="bottom" constant="19" id="gyO-f8-phS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8aO-NX-9UR" secondAttribute="trailing" constant="20" id="i55-Eo-jbR"/>
+                            <constraint firstItem="8aO-NX-9UR" firstAttribute="top" secondItem="Xw9-Qt-EWC" secondAttribute="bottom" constant="12" id="l0f-1M-rqw"/>
                             <constraint firstItem="4l8-LT-hd1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="qI2-wm-Ib9"/>
                             <constraint firstItem="MHm-T9-rF4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qh4-Hk-iJf"/>
-                            <constraint firstItem="MHm-T9-rF4" firstAttribute="top" secondItem="Xw9-Qt-EWC" secondAttribute="bottom" constant="-30" id="sL2-NI-Skc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Xw9-Qt-EWC" secondAttribute="trailing" constant="30" id="xtT-Nz-4fi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

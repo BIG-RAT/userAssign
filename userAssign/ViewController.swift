@@ -81,7 +81,7 @@ class ViewController: UIViewController, URLSessionDelegate {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = ["Authorization" : "Basic \(String(describing: base64Creds!))", "Content-type" : "application/xml"]
         
-        let session = Foundation.URLSession(configuration: configuration, delegate: self as? URLSessionDelegate, delegateQueue: OperationQueue.main)
+        let session = Foundation.URLSession(configuration: configuration, delegate: self as URLSessionDelegate, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request as URLRequest, completionHandler: {
             (data, response, error) -> Void in
             if let httpResponse = response as? HTTPURLResponse {
@@ -96,7 +96,7 @@ class ViewController: UIViewController, URLSessionDelegate {
                     self.message_TextView.textColor = UIColor.red
                     self.message_TextView.font =  UIFont(name: "HelveticaNeue", size: CGFloat(32))
                 }
-            }
+            }   // if let httpResponse - end
             self.spinner.stopAnimating()
         })
         task.resume()
@@ -127,11 +127,52 @@ class ViewController: UIViewController, URLSessionDelegate {
             self.message_TextView.textColor = UIColor.red
             self.message_TextView.font =  UIFont(name: "HelveticaNeue", size: CGFloat(32))
             // for simulator testing without app config
-            baseUrl    = "https://your.jamf.server"
-            username   = "userAssign"
+            baseUrl    = "https://m.hickoryhillseast.net"
+            username   = "testUserAssign"
             password   = "S3cr3t"
-            deviceUdid = "c49c160637321fa3905c4311ad0d2313d93015bb"   // test device
-        }
+            deviceUdid = "80023a617b92bbc7aca27463a3df5ac0b188a654"   // test device udid
+        }   // if let configDict - end
+        
+        // pull list for dropdown from EA
+                let attributeURL = "\(baseUrl)/JSSResource/mobiledeviceextensionattributes/id/18"
+                let creds        = "\(username):\(password)"
+                let base64Creds  = creds.data(using: .utf8)?.base64EncodedString()
+                // attempt to update - start
+                URLCache.shared.removeAllCachedResponses()
+                
+                let encodedUrl = NSURL(string: attributeURL)
+                let request = NSMutableURLRequest(url: encodedUrl! as URL)
+                request.httpMethod = "GET"
+//                request.httpBody = assignXml.data(using: String.Encoding.utf8)
+                let configuration = URLSessionConfiguration.default
+                configuration.httpAdditionalHeaders = ["Authorization" : "Basic \(String(describing: base64Creds!))", "Accept" : "application/json"]
+                
+                let session = Foundation.URLSession(configuration: configuration, delegate: self as URLSessionDelegate, delegateQueue: OperationQueue.main)
+                let task = session.dataTask(with: request as URLRequest, completionHandler: {
+                    (data, response, error) -> Void in
+                    if let httpResponse = response as? HTTPURLResponse {
+//                        print("httpResponse: \(httpResponse)")
+                        do {
+                            let json = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+                            if let dataJSON = json as? [String:Any] {
+                                print("dataJSON: \(dataJSON)")
+                                let eaAttributes = dataJSON["mobile_device_extension_attribute"] as! [String:Any]
+                                let eaName = eaAttributes["name"] as! String
+                                guard let _ = eaAttributes["input_type"] else { return }
+                                let input_type = eaAttributes["input_type"] as! [String:Any]
+                                if input_type["type"] as! String == "Pop-up Menu" {
+                                    let popup_choices = input_type["popup_choices"] as! [String]
+                                    print("popup_choices for \(eaName): \(popup_choices)")
+                                }
+                            }
+                        }
+                    }   // if let httpResponse - end
+                    self.spinner.stopAnimating()
+                })
+                task.resume()
+                // attempt to update - end
+        
+        
     }
     
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping(  URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
