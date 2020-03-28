@@ -148,7 +148,9 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3KZ-ZO-kb7">
                                 <rect key="frame" x="393" y="822" width="48" height="30"/>
-                                <state key="normal" title="Cancel"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="cancel_Action:" destination="lg9-Ab-iIm" eventType="touchUpInside" id="irT-Qg-cLh"/>
                                 </connections>
@@ -158,6 +160,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="207" id="It7-Fj-wsl"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="T7D-Jf-ALS"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="customConfig" rowHeight="37" id="5bi-4L-koa">
@@ -180,9 +183,8 @@
                             <constraint firstItem="cH4-vD-yA7" firstAttribute="centerX" secondItem="zCq-RF-uJf" secondAttribute="centerX" id="2OG-Ah-Dm8"/>
                             <constraint firstItem="i4S-A1-ORG" firstAttribute="bottom" secondItem="3KZ-ZO-kb7" secondAttribute="bottom" constant="260" id="6UP-pz-gob"/>
                             <constraint firstItem="3KZ-ZO-kb7" firstAttribute="top" secondItem="cH4-vD-yA7" secondAttribute="bottom" constant="20" id="ABL-j0-rR4"/>
-                            <constraint firstItem="i4S-A1-ORG" firstAttribute="trailing" secondItem="cH4-vD-yA7" secondAttribute="trailing" constant="297" id="Vbs-8S-e0O"/>
+                            <constraint firstItem="cH4-vD-yA7" firstAttribute="leading" secondItem="i4S-A1-ORG" secondAttribute="leading" constant="297" id="I2H-xA-EOI"/>
                             <constraint firstItem="3KZ-ZO-kb7" firstAttribute="centerX" secondItem="zCq-RF-uJf" secondAttribute="centerX" id="XHa-Ld-Tvp"/>
-                            <constraint firstItem="cH4-vD-yA7" firstAttribute="leading" secondItem="i4S-A1-ORG" secondAttribute="leading" constant="297" id="yAT-1G-SMM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="i4S-A1-ORG"/>
                     </view>
