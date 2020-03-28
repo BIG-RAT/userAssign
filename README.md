@@ -3,7 +3,7 @@ App used to assign a user to an iOS device and optionally add an asset tag to th
 
 Basic iOS app written in Swift.  The app utilizes an app configuration and user input to assign the device to a user.<br/>
 
-The account used in the app config should have at last the following permissions:<br/>
+The account used in the app config should have at least the following permissions:<br/>
 **Jamf Pro Server Objects**<br/>
 Mobile Device Extension Attributes - Read<br/>
 Mobile Devices - Read and Update<br/>
