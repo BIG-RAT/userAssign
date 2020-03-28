@@ -5,7 +5,7 @@ Basic iOS app written in Swift.  The app utilizes an app configuration and user 
 
 The account used in the app config should have at last the following permissions:<br/>
 **Jamf Pro Server Objects**<br/>
-Mobile Device Extension Attributes - read<br/>
+Mobile Device Extension Attributes - Read<br/>
 Mobile Devices - Read and Update<br/>
 Users - Create, Read, and Update<br/>
 
