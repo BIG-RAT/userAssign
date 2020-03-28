@@ -1,0 +1,14 @@
+<dict>
+	<key>baseUrl</key>
+	<string>https://your.jamf.server</string>
+	<key>udid</key>
+	<string>$UDID</string>
+	<key>username</key>
+	<string>userAssign</string>
+	<key>password</key>
+	<string>ch@ngeM3</string>
+	<key>eaShow</key>
+	<string>yes</string>
+	<key>eaID</key>
+	<string>18</string>
+</dict>
