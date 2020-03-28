@@ -11,7 +11,7 @@ There is also the option to utilize the value of a popup extension attribute.  T
 <key>eaID</key>
 <string>19</string>
 ```
-Tap the extension attribute name (Device Config in this example), located to the right and below the asset tag field, then select the value.
+Tap the extension attribute name (Device Config in this example), located to the left and below the asset tag field, then select the value.
 
 <img src="./images/userAssign2.png" alt="userAssign" />
 <br/><br/>
